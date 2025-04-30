@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task Manager - Home</title>
+  <link rel="stylesheet" href="index.css" />
+  <script defer src="index2.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="navclass">
+      <div class="logo">
+        <a href="index2.html">Task Manager</a>
+      </div>
+      <ul class="nav-middle">
+        <li><a href="index2.html" class="active">Home</a></li>
+        <li><a href="priority.html">Priority</a></li>
+        <li><a href="unfinished.html">Unfinished</a></li>
+        <li><a href="applicationinfo.html">Application Info</a></li>
+        <li><a href="id.html">Developer Profiles</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+        <li><a href="login.html">Log In</a></li>
+      </ul>
+      <div class="nav-right">
+        <div id="userMenu" class="user-menu">
+          <span id="usernameDisplay">User</span>
+          <div id="userDropdown" class="user-dropdown">
+            <a href="#" id="logoutBtn">Sign Out</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Welcome to Your Task Manager</h1>
+    <button id="addTaskButton">Add Task</button>
+    <div id="taskContainer"></div>
+  </main>
+
+  <!-- Add Task Modal -->
+  <div id="taskModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <h2>Add Task</h2>
+      <form id="taskForm">
+        <label for="taskName">Task Name:</label>
+        <input type="text" id="taskName" required><br><br>
+
+        <label>Start Date:</label>
+        <input type="date" id="startDate" required>
+        <label>Start Time:</label>
+        <input type="time" id="startTime" required><br><br>
+
+        <label>End Date:</label>
+        <input type="date" id="endDate" required>
+        <label>End Time:</label>
+        <input type="time" id="endTime" required><br><br>
+
+        <label><input type="checkbox" id="priority"> Priority</label><br><br>
+
+        <button type="submit">Add Task</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Reschedule Modal -->
+  <div id="rescheduleModal" class="modal">
+    <div class="modal-content">
+      <span id="closeRescheduleModal">&times;</span>
+      <h2>Reschedule Task: <span id="rescheduleTaskName"></span></h2>
+      <form id="rescheduleForm">
+        <label for="rescheduleOption">Schedule For:</label>
+        <select id="rescheduleOption" required>
+          <option value="today">Today</option>
+          <option value="another">Another Day</option>
+        </select><br><br>
+
+        <label for="rescheduleStartDate">New Start Date:</label>
+        <input type="date" id="rescheduleStartDate" required><br><br>
+
+        <label for="rescheduleStartTime">New Start Time:</label>
+        <input type="time" id="rescheduleStartTime" required><br><br>
+
+        <label for="rescheduleEndDate">New End Date:</label>
+        <input type="date" id="rescheduleEndDate" required><br><br>
+
+        <label for="rescheduleEndTime">New End Time:</label>
+        <input type="time" id="rescheduleEndTime" required><br><br>
+
+        <label><input type="checkbox" id="reschedulePriority"> Priority</label><br><br>
+
+        <button type="submit">Reschedule</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+</body>
+</html>
