@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <header>
+    <nav class="navclass">
+      <div class="logo">
+        <a href="index2.html">Task Manager</a>
+      </div>
+      <ul>
+        <li><a href="index2.html">Home</a></li>
+        <li><a href="signup.html" class="active">Sign Up</a></li>
+        <li><a href="login.html">Log In</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Sign Up</h1>
+    <form id="signupForm">
+      <label for="username">Username:</label><br>
+      <input type="text" id="username" required><br><br>
+
+      <label for="password">Password:</label><br>
+      <input type="password" id="password" required><br><br>
+
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p id="message"></p>
+  </main>
+
+  <script>
+    const signupForm = document.getElementById('signupForm');
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      const res = await fetch('/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+      const message = document.getElementById('message');
+
+      if (res.ok) {
+        message.innerText = 'Signup successful! You can now log in.';
+        message.style.color = 'green';
+        signupForm.reset();
+      } else {
+        message.innerText = data.message;
+        message.style.color = 'red';
+      }
+    });
+  </script>
+
+</body>
+</html>

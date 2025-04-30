@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Application Info</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <header>
+    <nav class="navclass">
+      <div class="logo">
+        <a href="index2.html">Task Manager</a>
+      </div>
+      <ul class="nav-middle">
+        <li><a href="index2.html">Home</a></li>
+        <li><a href="priority.html">Priority</a></li>
+        <li><a href="unfinished.html">Unfinished</a></li>
+        <li><a href="applicationinfo.html" class="active">Application Info</a></li>
+        <li><a href="id.html">Developer Profiles</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+        <li><a href="login.html">Log In</a></li>
+      </ul>
+      <div class="nav-right">
+        <div id="userMenu" class="user-menu">
+          <span id="usernameDisplay">User</span>
+          <div id="userDropdown" class="user-dropdown">
+            <a href="#" id="logoutBtn">Sign Out</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h1>Information</h1>
+      <p>This page provides information about the application, including an overview, its features, and the development tools used to create it.</p>
+    </section>
+
+    <section>
+      <h2>Application Overview</h2>
+      <p>The Task Manager application helps users organize, prioritize, and track tasks. Its goal is to boost productivity by keeping tasks structured and deadlines clear.</p>
+    </section>
+
+    <section>
+      <h2>Features</h2>
+      <ul>
+        <li><strong>View Today's Tasks:</strong> All current day's tasks are displayed as cards sorted by time.</li>
+        <li><strong>Add Tasks:</strong> Users can click "Add Task" to open a form with name, time, and priority toggle.</li>
+        <li><strong>Priority Filter:</strong> Priority tasks appear in both Home and Priority tabs.</li>
+        <li><strong>Unfinished Tasks:</strong> Overdue tasks appear in both Home and Unfinished tabs.</li>
+        <li><strong>Task Completion:</strong> Tasks can be marked as done with a checkbox and fade away visually.</li>
+        <li><strong>Rescheduling:</strong> Overdue tasks prompt a reschedule on login or have a reschedule button.</li>
+        <li><strong>Sign-Up/Sign-In:</strong> Users can create accounts to save their tasks persistently across devices.</li>
+        <li><strong>Session Display:</strong> Username appears in the top right when logged in, with a hover menu to sign out.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Development Tools & Technologies</h2>
+      <ul>
+        <li><strong>HTML & CSS:</strong> Used for structuring and styling the user interface.</li>
+        <li><strong>Vanilla JavaScript:</strong> Handles interactivity, dynamic rendering of tasks, and session UI updates.</li>
+        <li><strong>Node.js & Express.js:</strong> Server-side platform to handle user authentication and task storage.</li>
+        <li><strong>JSON (users.json):</strong> Local JSON file used as a basic persistent data store for signup and task data.</li>
+        <li><strong>GitHub:</strong> Used for version control and collaboration throughout the project lifecycle.</li>
+        <li><strong>Azure App Service (planned):</strong> Will be used for deploying and hosting the final website online.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    const usernameDisplay = document.getElementById('usernameDisplay');
+    const userMenu = document.getElementById('userMenu');
+    const userDropdown = document.getElementById('userDropdown');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    if (loggedInUser) {
+      usernameDisplay.textContent = loggedInUser;
+      document.querySelectorAll('.nav-middle li').forEach(link => {
+        const text = link.textContent.trim();
+        if (text === "Sign Up" || text === "Log In") {
+          link.style.display = 'none';
+        }
+      });
+    }
+
+    userMenu.addEventListener('mouseenter', () => {
+      userDropdown.style.display = 'block';
+    });
+
+    userMenu.addEventListener('mouseleave', () => {
+      setTimeout(() => {
+        if (!userDropdown.matches(':hover')) {
+          userDropdown.style.display = 'none';
+        }
+      }, 100);
+    });
+
+    userDropdown.addEventListener('mouseleave', () => {
+      userDropdown.style.display = 'none';
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('loggedInUser');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
